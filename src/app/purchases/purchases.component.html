@@ -1,17 +1,46 @@
-<h2>Total Expenses: {{ totalExpenses.toFixed(2) }} €</h2>
-<label for="">Amount</label>
-<input type="text" #count>
-<label for="">Name</label>
-<input type="text" #name>
-<label for="">Price</label>
-<input type="text" #price>
-<button (click)="add(name.value, +count.value, +price.value)" type="submit">Add</button>
-<button (click)="sync()">Sync</button>
-<ul>
-    <li *ngFor="let purchase of purchases">
-        <span>{{ purchase.count }}x </span>
-        <span>{{ purchase.name }} </span>
-        <span> {{ purchase.price.toFixed(2) + "€"}} </span>
-        <button (click)="delete(purchase.id)">Delete</button>
-    </li>
+<mat-toolbar color="primary">
+    <span>Total Expenses: {{ totalExpenses.toFixed(2) }} €</span>
+</mat-toolbar>
+<mat-form-field style="margin: 0 10px">
+  <mat-label>Amount</mat-label>
+  <input matInput type="number" #count />
+</mat-form-field>
+<mat-form-field style="margin: 0 10px">
+  <mat-label>Name</mat-label>
+  <input matInput type="text" #name />
+</mat-form-field>
+<mat-form-field style="margin: 0 10px">
+  <mat-label>Price</mat-label>
+  <input matInput type="text" #price />
+</mat-form-field>
+
+<button mat-fab color="basic" (click)="add(name.value, +count.value, +price.value)" type="submit">
+  <mat-icon aria-hidden="false" aria-label="Add Purchase" fontIcon="add"></mat-icon>
+</button>
+<button mat-fab color="primary" (click)="sync()">
+    <mat-icon aria-hidden="false" aria-label="Synchronize" fontIcon="sync"></mat-icon>
+</button>
+<ul style="list-style: none">
+  <li *ngFor="let purchase of purchases">
+    <mat-card class="card">
+      <mat-card-content style="display: flex; align-items: center; justify-content: space-between;">
+        <span style="font-size: 1.5em"
+          >{{ purchase.count }}x {{ purchase.name }}
+          {{ purchase.price.toFixed(2) + "€" }}
+        </span>
+        <button
+          style="float: right"
+          mat-mini-fab
+          color="warn"
+          (click)="delete(purchase.id)"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="delete"
+          ></mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </li>
 </ul>

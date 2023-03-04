@@ -11,6 +11,7 @@ import { SyncService } from '../sync.service';
 export class PurchasesComponent {
   purchases: Purchase[] = [];
   totalExpenses: number = 0;
+  value = 'HEEEY';
 
   constructor(
     private purchaseService: PurchasesService,
