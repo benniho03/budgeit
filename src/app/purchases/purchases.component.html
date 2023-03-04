@@ -1,8 +1,11 @@
-<input type="text" #name>
+<label for="">Amount</label>
 <input type="text" #count>
+<label for="">Name</label>
+<input type="text" #name>
+<label for="">Price</label>
 <input type="text" #price>
 <button (click)="add(name.value, +count.value, +price.value)" type="submit">Add</button>
-
+<button (click)="sync()">Sync</button>
 <ul>
     <li *ngFor="let purchase of purchases">
         <span>Amount: {{ purchase.count }} -</span>
