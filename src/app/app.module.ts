@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatInputModule,
     MatCardModule,
+    DragDropModule,
     MatToolbarModule,    
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),

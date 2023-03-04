@@ -1,7 +1,7 @@
-<mat-toolbar color="primary">
+<mat-toolbar style="margin-bottom: 0.5em;" color="primary">
     <span>Total Expenses: {{ totalExpenses.toFixed(2) }} €</span>
 </mat-toolbar>
-<mat-form-field style="margin: 0 10px">
+<mat-form-field style="margin: 0 10px;">
   <mat-label>Amount</mat-label>
   <input matInput type="number" #count />
 </mat-form-field>
@@ -20,27 +20,17 @@
 <button mat-fab color="primary" (click)="sync()">
     <mat-icon aria-hidden="false" aria-label="Synchronize" fontIcon="sync"></mat-icon>
 </button>
-<ul style="list-style: none">
-  <li *ngFor="let purchase of purchases">
-    <mat-card class="card">
-      <mat-card-content style="display: flex; align-items: center; justify-content: space-between;">
+<div class="example-list" cdkDropList (cdkDropListDropped)="drop($event)">
+  <mat-card class="example-box" cdkDrag *ngFor="let purchase of purchases">
+      <mat-card-content class="example-box-content">
         <span style="font-size: 1.5em"
           >{{ purchase.count }}x {{ purchase.name }}
           {{ purchase.price.toFixed(2) + "€" }}
         </span>
-        <button
-          style="float: right"
-          mat-mini-fab
-          color="warn"
-          (click)="delete(purchase.id)"
+        <button mat-mini-fab color="warn" (click)="delete(purchase.id)"
         >
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="delete"
-          ></mat-icon>
+          <mat-icon aria-hidden="false" aria-label="Delete" fontIcon="delete"></mat-icon>
         </button>
       </mat-card-content>
-    </mat-card>
-  </li>
-</ul>
+  </mat-card>
+</div>

@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { Purchase } from '../purchase';
 import { PurchasesService } from '../purchases.service';
@@ -11,7 +12,6 @@ import { SyncService } from '../sync.service';
 export class PurchasesComponent {
   purchases: Purchase[] = [];
   totalExpenses: number = 0;
-  value = 'HEEEY';
 
   constructor(
     private purchaseService: PurchasesService,
@@ -49,5 +49,14 @@ export class PurchasesComponent {
   async delete(id : string){
     await this.purchaseService.deleteEntry(id)
     await this.refresh()
+  }
+
+
+
+
+
+  //Styling methods
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.purchases, event.previousIndex, event.currentIndex);
   }
 }
