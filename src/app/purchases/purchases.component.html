@@ -1,4 +1,4 @@
-<h2>Total Expenses: {{getTotalExpenses() }}</h2>
+<h2>Total Expenses: {{ totalExpenses.toFixed(2) }} €</h2>
 <label for="">Amount</label>
 <input type="text" #count>
 <label for="">Name</label>
@@ -9,9 +9,9 @@
 <button (click)="sync()">Sync</button>
 <ul>
     <li *ngFor="let purchase of purchases">
-        <span>Amount: {{ purchase.count }} -</span>
-        <span> {{ purchase.name }} -</span>
-        <span>Price: {{ purchase.price + "€"}}</span>
+        <span>{{ purchase.count }}x </span>
+        <span>{{ purchase.name }} </span>
+        <span> {{ purchase.price.toFixed(2) + "€"}} </span>
         <button (click)="delete(purchase.id)">Delete</button>
     </li>
 </ul>

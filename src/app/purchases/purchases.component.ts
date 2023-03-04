@@ -10,6 +10,7 @@ import { SyncService } from '../sync.service';
 })
 export class PurchasesComponent {
   purchases: Purchase[] = [];
+  totalExpenses: number = 0;
 
   constructor(
     private purchaseService: PurchasesService,
@@ -19,20 +20,19 @@ export class PurchasesComponent {
   }
 
   async refresh() {
+    this.totalExpenses = await this.getTotalExpenses();
     this.purchases = await this.purchaseService.getAll();
   }
 
 
   async getTotalExpenses(){
     const allPurchases = await this.purchaseService.getAll()
-
-    let totalExpenses: number;
-
+    this.totalExpenses = 0;
     allPurchases.forEach(purchase =>{
-      totalExpenses += purchase.count * purchase.price
+      this.totalExpenses += purchase.count * purchase.price
     })
 
-    return allPurchases;
+    return this.totalExpenses;
   }
 
   async add(name: string, count: number, price: number) {
