@@ -1,0 +1,12 @@
+<input type="text" #name>
+<input type="text" #count>
+<input type="text" #price>
+<button (click)="add(name.value, +count.value, +price.value)" type="submit">Add</button>
+
+<ul>
+    <li *ngFor="let purchase of purchases">
+        <span>Amount: {{ purchase.count }} -</span>
+        <span> {{ purchase.name }} -</span>
+        <span>Price: {{ purchase.price + "€"}}</span>
+    </li>
+</ul>
