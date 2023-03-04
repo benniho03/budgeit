@@ -11,5 +11,6 @@
         <span>Amount: {{ purchase.count }} -</span>
         <span> {{ purchase.name }} -</span>
         <span>Price: {{ purchase.price + "€"}}</span>
+        <button (click)="delete(purchase.id)">Delete</button>
     </li>
 </ul>

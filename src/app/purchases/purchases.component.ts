@@ -31,4 +31,9 @@ export class PurchasesComponent {
     await this.syncService.sync();
     await this.refresh();
   }
+
+  async delete(id : string){
+    await this.purchaseService.deleteEntry(id)
+    await this.refresh()
+  }
 }

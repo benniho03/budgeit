@@ -8,7 +8,7 @@ import { Purchase } from './purchase';
 })
 export class PurchasesService extends Dexie{
 
-  purchases!: Dexie.Table<Purchase, number>
+  purchases!: Dexie.Table<Purchase, string>
 
   constructor() {
     super('purchases');
@@ -18,7 +18,7 @@ export class PurchasesService extends Dexie{
   }
 
   async add(name: string, count: number, price: number) {
-    const purchase = {id: crypto.randomUUID() , name, count, price};
+    const purchase = {id: crypto.randomUUID(), name, count, price};
 
     await this.purchases.add(purchase);
   }
@@ -29,6 +29,10 @@ export class PurchasesService extends Dexie{
 
   async bulkPut(purchaseArray: Purchase[]) {
     await this.purchases.bulkPut(purchaseArray);
+  }
+
+  async deleteEntry(id :string){
+    await this.purchases.delete(id)
   }
 
 }
