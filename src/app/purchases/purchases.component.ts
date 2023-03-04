@@ -22,6 +22,19 @@ export class PurchasesComponent {
     this.purchases = await this.purchaseService.getAll();
   }
 
+
+  async getTotalExpenses(){
+    const allPurchases = await this.purchaseService.getAll()
+
+    let totalExpenses: number;
+
+    allPurchases.forEach(purchase =>{
+      totalExpenses += purchase.count * purchase.price
+    })
+
+    return allPurchases;
+  }
+
   async add(name: string, count: number, price: number) {
     await this.purchaseService.add(name, count, price);
     await this.refresh();
