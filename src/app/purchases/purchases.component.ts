@@ -1,8 +1,14 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Purchase } from '../purchase';
 import { PurchasesService } from '../purchases.service';
 import { SyncService } from '../sync.service';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-purchases',
@@ -15,7 +21,8 @@ export class PurchasesComponent {
 
   constructor(
     private purchaseService: PurchasesService,
-    private syncService: SyncService
+    private syncService: SyncService,
+    public dialog: MatDialog
   ) {
     this.refresh();
   }
@@ -25,13 +32,12 @@ export class PurchasesComponent {
     this.purchases = await this.purchaseService.getAll();
   }
 
-
-  async getTotalExpenses(){
-    const allPurchases = await this.purchaseService.getAll()
+  async getTotalExpenses() {
+    const allPurchases = await this.purchaseService.getAll();
     this.totalExpenses = 0;
-    allPurchases.forEach(purchase =>{
-      this.totalExpenses += purchase.count * purchase.price
-    })
+    allPurchases.forEach((purchase) => {
+      this.totalExpenses += purchase.count * purchase.price;
+    });
 
     return this.totalExpenses;
   }
@@ -46,17 +52,56 @@ export class PurchasesComponent {
     await this.refresh();
   }
 
-  async delete(id : string){
-    await this.purchaseService.deleteEntry(id)
-    await this.refresh()
+  async delete(id: string) {
+    await this.purchaseService.deleteEntry(id);
+    await this.refresh();
+  }
+  /*
+  openDialog(id : string, name : string, count : number, price : number): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {id: id, name: name, count: count, price: price},
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
   }
 
+  @Component({
+    selector: 'app-dialog',
+    templateUrl: './dialog.component.html',
+    styleUrls: ['./dialog.component.css']
+  })
+  export class DialogComponent {
+    
+    constructor(
+      public dialogRef: MatDialogRef<DialogComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: Purchase,
+    ) {}
+  
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+*/
 
+  openDialog(id: string, name: string, count: number, price: number) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        id: id,
+        name: name,
+        count: count,
+        price: price
+      },
+    });
 
-
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   //Styling methods
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.purchases, event.previousIndex, event.currentIndex);
   }
 }
+
