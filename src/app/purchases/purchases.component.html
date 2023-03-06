@@ -26,6 +26,7 @@
         <span style="font-size: 1.5em"
           >{{ purchase.count }}x {{ purchase.name }}
           {{ purchase.price.toFixed(2) + "€" }}
+          {{ purchase.createdAt.toLocaleDateString() }}
         </span>
         <button mat-mini-fab color="warn" (click)="delete(purchase.id)"
         >

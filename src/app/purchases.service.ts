@@ -18,7 +18,8 @@ export class PurchasesService extends Dexie{
   }
 
   async add(name: string, count: number, price: number) {
-    const purchase = {id: crypto.randomUUID(), name, count, price};
+    const currentDate = new Date();
+    const purchase = {id: crypto.randomUUID(), name, count, price, createdAt: currentDate};
 
     await this.purchases.add(purchase);
   }

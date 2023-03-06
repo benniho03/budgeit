@@ -2,5 +2,6 @@ export interface Purchase {
     id: string,
     name: string,
     count: number,
-    price: number
+    price: number,
+    createdAt: Date
 }
