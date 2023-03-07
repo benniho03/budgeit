@@ -21,7 +21,7 @@ export class DialogComponent {
     
   }
 
-  close() {
+  save() {
     this.dialogRef.close({
       id: this.data.id,
       count: this.count,
@@ -34,6 +34,6 @@ export class DialogComponent {
     this.count = count;
     this.name = name;
     this.price = price;
-    this.close();
+    this.save();
   }
 }

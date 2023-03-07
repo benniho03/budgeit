@@ -69,6 +69,7 @@ export class PurchasesComponent {
     
 
     dialogRef.afterClosed().subscribe((result) => {
+      if (!result.id) return;
       this.purchaseService.editEntry(result);
       this.refresh();
     });
