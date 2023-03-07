@@ -56,33 +56,6 @@ export class PurchasesComponent {
     await this.purchaseService.deleteEntry(id);
     await this.refresh();
   }
-  /*
-  openDialog(id : string, name : string, count : number, price : number): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      data: {id: id, name: name, count: count, price: price},
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  @Component({
-    selector: 'app-dialog',
-    templateUrl: './dialog.component.html',
-    styleUrls: ['./dialog.component.css']
-  })
-  export class DialogComponent {
-    
-    constructor(
-      public dialogRef: MatDialogRef<DialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: Purchase,
-    ) {}
-  
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-*/
 
   openDialog(id: string, name: string, count: number, price: number) {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -93,9 +66,12 @@ export class PurchasesComponent {
         price: price
       },
     });
+    
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      console.log(`Dialog result: ${result.count}`);
+      this.purchaseService.editEntry(result);
+      this.refresh();
     });
   }
 

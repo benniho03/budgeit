@@ -33,7 +33,15 @@ export class PurchasesService extends Dexie{
   }
 
   async deleteEntry(id :string){
-    await this.purchases.delete(id)
+    await this.purchases.delete(id);
+  }
+
+  async editEntry(purchase: Purchase) {
+    await this.purchases.update(purchase.id, {
+      count: purchase.count,
+      name: purchase.name,
+      price: purchase.price
+    });
   }
 
 }
