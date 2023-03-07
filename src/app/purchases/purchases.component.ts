@@ -69,7 +69,6 @@ export class PurchasesComponent {
     
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result.count}`);
       this.purchaseService.editEntry(result);
       this.refresh();
     });
