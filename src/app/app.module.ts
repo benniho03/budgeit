@@ -13,12 +13,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PurchasesComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatInputModule,
     MatCardModule,
     DragDropModule,
-    MatToolbarModule,    
+    MatToolbarModule,
+    MatDialogModule,    
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

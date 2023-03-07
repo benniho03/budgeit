@@ -26,10 +26,12 @@
         <span style="font-size: 1.5em"
           >{{ purchase.count }}x {{ purchase.name }}
           {{ purchase.price.toFixed(2) + "€" }}
-          {{ purchase.createdAt.toLocaleDateString() }}
+          {{ purchase.createdAt!.toLocaleDateString() }}
         </span>
-        <button mat-mini-fab color="warn" (click)="delete(purchase.id)"
-        >
+        <button mat-mini-fab color="primary" (click)="openDialog(purchase.id, purchase.name, purchase.count, purchase.price)">
+          <mat-icon aria-hidden="false" aria-label="Edit" fontIcon="edit"></mat-icon>
+        </button>
+        <button mat-mini-fab color="warn" (click)="delete(purchase.id)">
           <mat-icon aria-hidden="false" aria-label="Delete" fontIcon="delete"></mat-icon>
         </button>
       </mat-card-content>
