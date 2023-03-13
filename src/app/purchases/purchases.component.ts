@@ -18,7 +18,8 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class PurchasesComponent {
   purchases: Purchase[] = [];
   totalExpenses: number = 0;
-
+  searchText: string = "";
+ 
   constructor(
     private purchaseService: PurchasesService,
     private syncService: SyncService,
