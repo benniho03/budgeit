@@ -15,6 +15,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { Ng2SearchPipeModule} from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { DialogComponent } from './dialog/dialog.component';
     MatCardModule,
     DragDropModule,
     MatToolbarModule,
-    MatDialogModule,    
+    MatDialogModule,
+    Ng2SearchPipeModule,
+    FormsModule,    
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

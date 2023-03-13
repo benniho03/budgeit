@@ -19,9 +19,13 @@
 </button>
 <button mat-fab color="primary" (click)="sync()">
     <mat-icon aria-hidden="false" aria-label="Synchronize" fontIcon="sync"></mat-icon>
-</button>
+</button> <br>
+<mat-form-field style="margin: 0 10px">
+  <mat-label>Search</mat-label>
+  <input matInput type="text"  [(ngModel)]="searchText" />
+</mat-form-field>
 <div class="example-list" cdkDropList (cdkDropListDropped)="drop($event)">
-  <mat-card class="example-box" cdkDrag *ngFor="let purchase of purchases">
+  <mat-card class="example-box" cdkDrag *ngFor="let purchase of purchases | filter:searchText">
       <mat-card-content class="example-box-content">
         <span style="font-size: 1.5em"
           >{{ purchase.count }}x {{ purchase.name }}
