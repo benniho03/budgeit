@@ -10,6 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Category } from '../category';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-purchases',
@@ -20,8 +21,12 @@ export class PurchasesComponent {
   purchases: Purchase[] = [];
   totalExpenses: number = 0;
   searchText: string = "";
-  categories: Category[] = [{name:'Groceries', color: '#873e23'}, {name: 'Education', color: '#e28743'}, {name: 'Mobility', color: '#1e81b0'}, {name: 'Luxury', color: '#b0a51e'}, {name: 'Hobbies', color: '#b01e81'}, {name: 'Clothing', color: '#6a1eb0'}];
- 
+  categories: Category[] = [{ name: 'Groceries', color: '#873e23' }, { name: 'Education', color: '#e28743' }, { name: 'Mobility', color: '#1e81b0' }, { name: 'Luxury', color: '#b0a51e' }, { name: 'Hobbies', color: '#b01e81' }, { name: 'Clothing', color: '#6a1eb0' }];
+
+  numberFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]);
+  nameFormControl = new FormControl('', [Validators.required]);
+  priceFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d+(.\d+)?$/)])
+
   constructor(
     private purchaseService: PurchasesService,
     private syncService: SyncService,
@@ -46,8 +51,8 @@ export class PurchasesComponent {
   }
 
   async add(name: string, count: number, price: number, category: string) {
-    const color = this.categories.find(cat => cat.name === category )!.color;
-    await this.purchaseService.add(name, count, price, {"name": category, "color": color.toString()});
+    const color = this.categories.find(cat => cat.name === category)!.color;
+    await this.purchaseService.add(name, count, price, { "name": category, "color": color.toString() });
     await this.refresh();
   }
 
@@ -61,6 +66,7 @@ export class PurchasesComponent {
     await this.refresh();
   }
 
+
   openDialog(id: string, name: string, count: number, price: number) {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
@@ -70,7 +76,7 @@ export class PurchasesComponent {
         price: price
       },
     });
-    
+
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result.id) return;

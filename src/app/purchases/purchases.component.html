@@ -3,15 +3,18 @@
 </mat-toolbar>
 <mat-form-field style="margin: 0 10px;">
   <mat-label>Amount</mat-label>
-  <input matInput type="number" #count />
+  <input matInput #count [formControl]="numberFormControl"/>
+  <mat-error *ngIf="numberFormControl.invalid">Please enter a valid number.</mat-error>
 </mat-form-field>
 <mat-form-field style="margin: 0 10px">
   <mat-label>Name</mat-label>
-  <input matInput type="text" #name />
+  <input matInput type="text" #name [formControl]="nameFormControl"/>
+  <mat-error *ngIf="nameFormControl.invalid">Please enter a valid name.</mat-error>
 </mat-form-field>
 <mat-form-field style="margin: 0 10px">
   <mat-label>Price</mat-label>
-  <input matInput type="text" #price />
+  <input matInput type="text" #price [formControl]="priceFormControl"/>
+  <mat-error *ngIf="priceFormControl.invalid">Please enter a valid price.</mat-error>
 </mat-form-field>
 <mat-form-field appearance="fill">
   <mat-label>Category</mat-label>
@@ -23,7 +26,7 @@
   </mat-select>
 </mat-form-field>
 
-<button mat-fab color="basic" (click)="add(name.value, +count.value, +price.value, category.value)" type="submit">
+<button mat-fab color="basic" (click)="numberFormControl.valid && nameFormControl.valid && priceFormControl.valid ? add(name.value, +count.value, +price.value, category.value):''" type="submit">
   <mat-icon aria-hidden="false" aria-label="Add Purchase" fontIcon="add"></mat-icon>
 </button>
 <button mat-fab color="primary" (click)="sync()">
