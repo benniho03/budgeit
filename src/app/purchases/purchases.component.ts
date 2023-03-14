@@ -9,6 +9,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-purchases',
@@ -19,6 +20,7 @@ export class PurchasesComponent {
   purchases: Purchase[] = [];
   totalExpenses: number = 0;
   searchText: string = "";
+  categories: Category[] = [{name:'Groceries', color: '#873e23'}, {name: 'Education', color: '#e28743'}, {name: 'Mobility', color: '#1e81b0'}, {name: 'Luxury', color: '#b0a51e'}, {name: 'Hobbies', color: '#b01e81'}, {name: 'Clothing', color: '#6a1eb0'}];
  
   constructor(
     private purchaseService: PurchasesService,
@@ -43,8 +45,9 @@ export class PurchasesComponent {
     return this.totalExpenses;
   }
 
-  async add(name: string, count: number, price: number) {
-    await this.purchaseService.add(name, count, price);
+  async add(name: string, count: number, price: number, category: string) {
+    const color = this.categories.find(cat => cat.name === category )!.color;
+    await this.purchaseService.add(name, count, price, {"name": category, "color": color.toString()});
     await this.refresh();
   }
 
