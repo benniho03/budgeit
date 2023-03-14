@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
+import { Category } from './category';
 import { Purchase } from './purchase';
 
 
@@ -17,9 +18,9 @@ export class PurchasesService extends Dexie{
     })
   }
 
-  async add(name: string, count: number, price: number) {
+  async add(name: string, count: number, price: number, category: Category) {
     const currentDate = new Date();
-    const purchase = {id: crypto.randomUUID(), name, count, price, createdAt: currentDate};
+    const purchase = {id: crypto.randomUUID(), name, count, price, createdAt: currentDate, category};
 
     await this.purchases.add(purchase);
   }

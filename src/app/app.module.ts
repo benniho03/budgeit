@@ -17,6 +17,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { Ng2SearchPipeModule} from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     MatToolbarModule,
     MatDialogModule,
     Ng2SearchPipeModule,
-    FormsModule,    
+    FormsModule,
+    MatSelectModule,    
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
