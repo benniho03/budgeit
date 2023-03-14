@@ -1,10 +1,10 @@
-<mat-toolbar class="mb-2" color="primary">
+<mat-toolbar class="mb-2 justify-center" color="primary">
   <span>Total Expenses: {{ totalExpenses.toFixed(2) }} €</span>
 </mat-toolbar>
 <div class="flex flex-col justify-around md:flex-row md:gap-3 md:justify-start">
   <mat-form-field class="w-10/12 mx-auto">
     <mat-label>Amount</mat-label>
-    <input matInput #count [formControl]="numberFormControl" />
+    <input type="text" matInput #count [formControl]="numberFormControl" />
     <mat-icon matSuffix>shopping_cart</mat-icon>
     <mat-error *ngIf="numberFormControl.invalid"
       >Please enter a valid number.</mat-error
@@ -76,7 +76,7 @@
         </div>
 
         <span
-          class="font-bold text-xl"
+          class="font-bold text-lg"
           [style.color]="purchase.category.color"
           >{{ purchase.category ? purchase.category.name : "" }}</span
         >
