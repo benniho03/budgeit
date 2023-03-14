@@ -85,6 +85,10 @@ export class PurchasesComponent {
     });
   }
 
+  formatDate(date : Date){
+    return date.toLocaleDateString("en-UK", { weekday: 'short', month: '2-digit', day: 'numeric' })
+  }
+
   //Styling methods
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.purchases, event.previousIndex, event.currentIndex);
