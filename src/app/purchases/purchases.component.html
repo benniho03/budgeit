@@ -5,6 +5,7 @@
   <mat-form-field class="w-10/12 mx-auto">
     <mat-label>Amount</mat-label>
     <input matInput #count [formControl]="numberFormControl" />
+    <mat-icon matSuffix>shopping_cart</mat-icon>
     <mat-error *ngIf="numberFormControl.invalid"
       >Please enter a valid number.</mat-error
     >
@@ -12,6 +13,7 @@
   <mat-form-field class="w-10/12 mx-auto">
     <mat-label>Name</mat-label>
     <input matInput type="text" #name [formControl]="nameFormControl" />
+    <mat-icon matSuffix>text_format</mat-icon>
     <mat-error *ngIf="nameFormControl.invalid"
       >Please enter a valid name.</mat-error
     >
@@ -19,6 +21,7 @@
   <mat-form-field class="w-10/12 mx-auto">
     <mat-label>Price</mat-label>
     <input matInput type="text" #price [formControl]="priceFormControl" />
+    <mat-icon matSuffix>attach_money</mat-icon>
     <mat-error *ngIf="priceFormControl.invalid"
       >Please enter a valid price.</mat-error
     >
@@ -47,17 +50,17 @@
     <mat-icon
       aria-hidden="false"
       aria-label="Add Purchase"
-      fontIcon="add"
-    ></mat-icon>
+    >add_shopping_cart</mat-icon>
   </button>
 </div>
-<div class="flex justify-center w-full md:w-6/12 mx-auto">
+<div class="flex justify-center w-10/12 md:w-6/12 mx-auto">
   <mat-form-field class="w-full">
     <mat-label>Search</mat-label>
     <input matInput type="text" [(ngModel)]="searchText" />
+    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </div>
-<div class="example-list flex flex-col items-center w-full mx-auto md:w-6/12" cdkDropList (cdkDropListDropped)="drop($event)">
+<div class="example-list flex flex-col items-center w-10/12 mx-auto md:w-6/12" cdkDropList (cdkDropListDropped)="drop($event)">
   <mat-card
     class="w-full example-box"
     cdkDrag
