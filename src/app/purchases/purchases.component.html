@@ -64,28 +64,37 @@
     class="w-full example-box"
     cdkDrag
     *ngFor="let purchase of purchases | filter : searchText"
-  >
-    <div class="px-3 flex justify-between items-center">
-      <div class="flex-col w-6/12 overflow-x-hidden">
-        <span class="text-gray-600">{{ formatDate(purchase.createdAt!) }}</span>
-
-        <div class="">
+    >
+    <div class="flex justify-between items-center">
+      <div class="flex justify-start w-1/12 mr-2">
+        <span class="text-left text-xs">{{ formatDate(purchase.createdAt!) }}</span>
+      </div>
+      <div class="pl-5 flex flex-col w-4/12 overflow-x-hidden">
+        
+        <span
+        class="font-bold lg:text-base text-xs"
+        [style.color]="purchase.category.color"
+        >{{ purchase.category ? purchase.category.name : "" }}</span
+        >
+        
+        <div>
           <span class="lg:text-xl text-lg text-gray-700">{{ purchase.count }}x </span>
           <span class="lg:text-2xl text-xl font-bold uppercase">{{ purchase.name }}</span>
         </div>
-
-        <span
-          class="font-bold lg:text-base text-sm"
-          [style.color]="purchase.category.color"
-          >{{ purchase.category ? purchase.category.name : "" }}</span
-        >
+        
       </div>
 
-      <span class="text-xl lg:text-2xl font-bold w-3/12 overflow-x-hidden">{{
-        purchase.price.toFixed(2) + "€"
-      }}</span>
-
-      <div class="flex justify-end gap-2 w-3/12" >
+      
+      <div class="flex flex-col items-end w-3/12 overflow-x-hidden">
+        <span class="text-sm lg:text-2xl">{{
+          purchase.price.toFixed(2) + "€"
+        }}</span>
+        <span class="text-xl lg:text-2xl font-bold">{{
+          (purchase.price * purchase.count).toFixed(2) + "€"
+        }}</span>
+      </div>
+      
+      <div class="flex justify-end gap-2 w-5/12" >
         <button
           mat-mini-fab
           color="primary"
