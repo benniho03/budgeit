@@ -3,12 +3,6 @@
 </mat-toolbar>
 <div class="flex flex-col justify-around md:w-10/12 md:mx-auto md:flex-row md:gap-3 md:justify-start">
   <mat-form-field class="w-10/12 mx-auto">
-    <mat-label>Amount</mat-label>
-    <input type="text" matInput #count [formControl]="numberFormControl" />
-    <mat-icon matSuffix>shopping_cart</mat-icon>
-    <mat-error *ngIf="numberFormControl.invalid">Please enter a valid number.</mat-error>
-  </mat-form-field>
-  <mat-form-field class="w-10/12 mx-auto">
     <mat-label>Name</mat-label>
     <input matInput type="text" #name [formControl]="requiredFormControl" />
     <mat-icon matSuffix>text_format</mat-icon>
