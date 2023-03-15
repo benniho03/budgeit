@@ -1,10 +1,6 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<h2 mat-dialog-title>Edit Entry</h2>
 <mat-dialog-content class="mat-typography">
   <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Amount</mat-label>
-      <input type="number" #amount matInput [value]="data.count" />
-    </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Name</mat-label>
       <input #name matInput [value]="data.name" />
@@ -12,6 +8,10 @@
     <mat-form-field class="example-full-width">
       <mat-label>Price</mat-label>
       <input #price matInput [value]="data.price" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Amount</mat-label>
+      <input type="number" #amount matInput [value]="data.count" />
     </mat-form-field>
   </form>
 </mat-dialog-content>
