@@ -24,6 +24,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { PurchaseCardComponent } from './purchase-card/purchase-card.component';
 import { AddEntryComponent } from './add-entry/add-entry.component';
 import { PurchasesListComponent } from './purchases-list/purchases-list.component';
+import { PurchaseSearchComponent } from './purchase-search/purchase-search.component';
+import { FilterChipsComponent } from './filter-chips/filter-chips.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { PurchasesListComponent } from './purchases-list/purchases-list.componen
     PurchaseCardComponent,
     AddEntryComponent,
     PurchasesListComponent,
+    PurchaseSearchComponent,
+    FilterChipsComponent,
   ],
   imports: [
     FormsModule,

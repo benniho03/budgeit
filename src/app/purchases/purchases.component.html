@@ -3,23 +3,20 @@
 </mat-toolbar>
 
 <app-add-entry (refresh)="refresh()"></app-add-entry>
-
 <div id="YourEntries" class="w-10/12 md:w-6/12 mx-auto">
   <span class="text-lg text-center">Your Entries</span>
 </div>
-<div id="Search" class="flex justify-center w-10/12 md:w-6/12 mx-auto">
-  <mat-form-field class="w-full">
-    <mat-label>Search</mat-label>
-    <input matInput type="text" [(ngModel)]="searchText" />
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</div>
-<div id="Filter" class="w-10/12 md:w-6/12 mx-auto">
-  <mat-chip-listbox aria-label="Filter by Categories" [(ngModel)]="filteredCategoryName">
-    <div *ngFor="let category of categories">
-      <mat-chip-option [ngStyle]="{'background-color' : isActiveCategory(category) ? category.color : ''}" (click)="setActiveCategory(category)">{{ category.name }}</mat-chip-option>
-    </div>
-  </mat-chip-listbox>
-</div>
-<app-purchases-list [searchText]="searchText" [filteredCategoryName]="filteredCategoryName" [purchases]="purchases" [categories]="this.categories" (refresh)="this.refresh()"></app-purchases-list>
-
+<app-purchase-search
+  (searchTextChanged)="searchText = $event"
+></app-purchase-search>
+<app-filter-chips
+  [categories]="this.categories"
+  (filteredCategoryChanged)="filteredCategoryName = $event"
+></app-filter-chips>
+<app-purchases-list
+  [searchText]="searchText"
+  [filteredCategoryName]="filteredCategoryName"
+  [purchases]="purchases"
+  [categories]="this.categories"
+  (refresh)="this.refresh()"
+></app-purchases-list>

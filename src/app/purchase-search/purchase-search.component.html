@@ -1,0 +1,12 @@
+<div id="Search" class="flex justify-center w-10/12 md:w-6/12 mx-auto">
+  <mat-form-field class="w-full">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="localSearchText"
+      (input)="onSearchTextChange()"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
