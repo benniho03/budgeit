@@ -3,19 +3,36 @@
   <form class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>Name</mat-label>
-      <input #name matInput [value]="data.name" />
+      <input #name matInput [value]="data.name" [formControl]="nameFormControl" />
+      <mat-error *ngIf="nameFormControl.invalid"
+      >Please enter a valid name.</mat-error
+      >
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Price</mat-label>
-      <input #price matInput [value]="data.price" />
+      <input #price matInput [value]="data.price" [formControl]="priceFormControl" />
+      <mat-error *ngIf="priceFormControl.invalid"
+      >Please enter a valid price.</mat-error
+      >
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Amount</mat-label>
-      <input type="number" #amount matInput [value]="data.count" />
+      <input type="number" #amount matInput [value]="data.count" [formControl]="numberFormControl" />
+      <mat-error *ngIf="numberFormControl.invalid"
+      >Please enter a valid number.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Category</mat-label>
+      <mat-select #category [value]="data.category" [formControl]="categoryFormControl">
+        <mat-option *ngFor="let category of categories" [value]="category.name">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" (click)="updateValues(+amount.value, name.value, +price.value)">Edit</button>
+  <button mat-button (click)='nameFormControl.valid && priceFormControl.valid && numberFormControl.valid && categoryFormControl.valid ? updateValues(+amount.value, name.value, +price.value, category.value) : ""'>Edit</button>
 </mat-dialog-actions>

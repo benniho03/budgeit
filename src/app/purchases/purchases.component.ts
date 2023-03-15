@@ -67,13 +67,14 @@ export class PurchasesComponent {
   }
 
 
-  openDialog(id: string, name: string, count: number, price: number) {
+  openDialog(id: string, name: string, count: number, price: number, category: Category) {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         id: id,
         name: name,
         count: count,
-        price: price
+        price: price,
+        category: category
       },
     });
 
