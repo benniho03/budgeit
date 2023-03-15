@@ -66,8 +66,9 @@
     *ngFor="let purchase of purchases | filter : searchText"
     >
     <div class="flex justify-between items-center">
-      <div class="flex justify-start w-1/12 mr-2">
-        <span class="text-left text-xs">{{ formatDate(purchase.createdAt!) }}</span>
+      <div class="flex flex-col justify-start items-center w-1/12">
+        <span class="text-left text-xs">{{ formatDate(purchase.createdAt!)[0] }}</span>
+        <span class="text-left text-xs">{{ formatDate(purchase.createdAt!)[1] }}</span>
       </div>
       <div class="pl-5 flex flex-col w-4/12 overflow-x-hidden">
         
@@ -86,7 +87,7 @@
 
       
       <div class="flex flex-col items-end w-3/12 overflow-x-hidden">
-        <span class="text-sm lg:text-2xl">{{
+        <span class="text-sm lg:text-xl">{{
           purchase.price.toFixed(2) + "€"
         }}</span>
         <span class="text-xl lg:text-2xl font-bold">{{
@@ -94,7 +95,7 @@
         }}</span>
       </div>
       
-      <div class="flex justify-end gap-2 w-5/12" >
+      <div class="flex justify-end gap-2 w-5/12 pr-4" >
         <button
           mat-mini-fab
           color="primary"

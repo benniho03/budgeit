@@ -85,8 +85,9 @@ export class PurchasesComponent {
     });
   }
 
-  formatDate(date : Date){
-    return date.toLocaleDateString("en-UK", { weekday: 'short', month: '2-digit', day: 'numeric' })
+  formatDate(date : Date) {
+    const dateArray : string[] = [date.toLocaleDateString("en-UK", { weekday: 'short' }), date.toLocaleDateString("en-UK", { month: '2-digit', day: 'numeric' })];
+    return dateArray
   }
 
   //Styling methods
