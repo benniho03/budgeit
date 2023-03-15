@@ -21,10 +21,10 @@ export class PurchasesComponent {
   purchases: Purchase[] = [];
   totalExpenses: number = 0;
   searchText: string = "";
-  categories: Category[] = [{ name: 'Groceries', color: '#873e23' }, { name: 'Education', color: '#e28743' }, { name: 'Mobility', color: '#1e81b0' }, { name: 'Luxury', color: '#b0a51e' }, { name: 'Hobbies', color: '#b01e81' }, { name: 'Clothing', color: '#6a1eb0' }];
+  categories: Category[] = [{ name: 'Groceries', color: '#873e23' }, { name: 'Education', color: '#e28743' }, { name: 'Mobility', color: '#1e81b0' }, { name: 'Luxury', color: '#b0a51e' }, { name: 'Hobbies', color: '#b01e81' }, { name: 'Clothing', color: '#6a1eb0' }, { name: 'Other', color: 'grey' }];
 
   numberFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]);
-  nameFormControl = new FormControl('', [Validators.required]);
+  requiredFormControl = new FormControl('', [Validators.required]);
   priceFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d+(.\d+)?$/)])
 
   constructor(
