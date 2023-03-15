@@ -1,10 +1,10 @@
 <mat-toolbar class="mb-2 justify-center" color="primary">
   <span>Total Expenses: {{ totalExpenses.toFixed(2) }} €</span>
 </mat-toolbar>
-<div class="w-10/12 mx-auto">
+<div id="NewEntry" class="w-10/12 mx-auto">
   <span class="text-lg ">New Entry</span>
 </div>
-<div class="flex flex-col justify-around md:w-10/12 md:mx-auto md:flex-row md:gap-3 md:justify-start">
+<div id="EntryInputs" class="flex flex-col justify-around md:w-10/12 md:mx-auto md:flex-row md:gap-3 md:justify-start">
   <mat-form-field class="w-10/12 mx-auto">
     <mat-label>Name</mat-label>
     <input matInput type="text" #name [formControl]="requiredFormControl" />
@@ -55,28 +55,35 @@
     </button>
   </div>
 </div>
-<div class="w-10/12 md:w-6/12 mx-auto">
+<div id="YourEntries" class="w-10/12 md:w-6/12 mx-auto">
   <span class="text-lg text-center">Your Entries</span>
 </div>
-<div class="flex justify-center w-10/12 md:w-6/12 mx-auto">
+<div id="Search" class="flex justify-center w-10/12 md:w-6/12 mx-auto">
   <mat-form-field class="w-full">
     <mat-label>Search</mat-label>
     <input matInput type="text" [(ngModel)]="searchText" />
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </div>
-<div class="example-list flex flex-col items-center w-10/12 mx-auto md:w-6/12" cdkDropList (cdkDropListDropped)="drop($event)">
+<div id="Filter" class="w-10/12 md:w-6/12 mx-auto">
+  <mat-chip-listbox aria-label="Filter by Categories" [(ngModel)]="filteredCategoryName">
+    <div *ngFor="let category of categories">
+      <mat-chip-option [ngStyle]="{'background-color' : isActiveCategory(category) ? category.color : ''}" (click)="setActiveCategory(category)">{{ category.name }}</mat-chip-option>
+    </div>
+  </mat-chip-listbox>
+</div>
+<div id="PurchasesList" class="example-list flex flex-col items-center w-10/12 mx-auto md:w-6/12" cdkDropList (cdkDropListDropped)="drop($event)">
   <mat-card
     class="w-full example-box"
     cdkDrag
-    *ngFor="let purchase of purchases | filter : searchText"
+    *ngFor="let purchase of purchases | filter : searchText | filter : filteredCategoryName"
     >
-    <div class="flex justify-between items-center">
-      <div class="flex flex-col justify-start items-center w-1/12">
+    <div id="Purchase" class="flex justify-between items-center">
+      <div id="Date" class="flex flex-col justify-start items-center w-1/12">
         <span class="text-left text-xs">{{ formatDate(purchase.createdAt!)[0] }}</span>
         <span class="text-left text-xs">{{ formatDate(purchase.createdAt!)[1] }}</span>
       </div>
-      <div class="pl-5 flex flex-col w-4/12 overflow-x-hidden">
+      <div id="Infos" class="pl-5 flex flex-col w-4/12 overflow-x-hidden">
         
         <span
         class="font-bold lg:text-base text-xs"
@@ -92,7 +99,7 @@
       </div>
 
       
-      <div class="flex flex-col items-end w-3/12 overflow-x-hidden">
+      <div id="Price" class="flex flex-col items-end w-3/12 overflow-x-hidden">
         <span class="text-sm lg:text-xl">{{
           purchase.price.toFixed(2) + "€"
         }}</span>
@@ -101,7 +108,7 @@
         }}</span>
       </div>
       
-      <div class="flex justify-end gap-2 w-5/12 pr-4" >
+      <div id="ActionButtons" class="flex justify-end gap-2 w-5/12 pr-4" >
         <button
           mat-mini-fab
           color="primary"

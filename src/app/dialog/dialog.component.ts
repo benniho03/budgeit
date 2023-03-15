@@ -24,7 +24,7 @@ export class DialogComponent {
   ){
     
   }
-  categories: Category[] = [{ name: 'Groceries', color: '#873e23' }, { name: 'Education', color: '#e28743' }, { name: 'Mobility', color: '#1e81b0' }, { name: 'Luxury', color: '#b0a51e' }, { name: 'Hobbies', color: '#b01e81' }, { name: 'Clothing', color: '#6a1eb0' }, { name: 'Other', color: 'grey' }];
+  categories: Category[] = [{ name: 'Groceries', color: '#16a34a' }, { name: 'Education', color: '#0e7490' }, { name: 'Mobility', color: '#fb923c' }, { name: 'Luxury', color: '#facc15' }, { name: 'Hobbies', color: '#a78bfa' }, { name: 'Clothing', color: '#f43f5e' }, { name: 'Other', color: '#27272a' }];
 
   numberFormControl = new FormControl(this.data.count, [Validators.required, Validators.pattern(/^\d+$/)]);
   nameFormControl = new FormControl(this.data.name, [Validators.required]);

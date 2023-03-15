@@ -20,12 +20,32 @@ import { FormControl, Validators } from '@angular/forms';
 export class PurchasesComponent {
   purchases: Purchase[] = [];
   totalExpenses: number = 0;
-  searchText: string = "";
-  categories: Category[] = [{ name: 'Groceries', color: '#16a34a' }, { name: 'Education', color: '#0e7490' }, { name: 'Mobility', color: '#fb923c' }, { name: 'Luxury', color: '#facc15' }, { name: 'Hobbies', color: '#a78bfa' }, { name: 'Clothing', color: '#f43f5e' }, { name: 'Other', color: '#27272a' }];
+  searchText: string = '';
+  categories: Category[] = [
+    { name: 'Groceries', color: '#16a34a' },
+    { name: 'Education', color: '#0e7490' },
+    { name: 'Mobility', color: '#fb923c' },
+    { name: 'Luxury', color: '#facc15' },
+    { name: 'Hobbies', color: '#a78bfa' },
+    { name: 'Clothing', color: '#f43f5e' },
+    { name: 'Other', color: '#27272a' },
+  ];
+  filteredCategoryName: string = '';
+  activeCategory: Category = { name: '', color: '' };
 
-  numberFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]);
+  numberFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^\d+$/),
+  ]);
   requiredFormControl = new FormControl('', [Validators.required]);
-  priceFormControl = new FormControl('', [Validators.required, Validators.pattern(/^\d+(.\d+)?$/)])
+  priceFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^\d+(.\d+)?$/),
+  ]);
+
+  log(content: string) {
+    console.log(content);
+  }
 
   constructor(
     private purchaseService: PurchasesService,
@@ -51,9 +71,24 @@ export class PurchasesComponent {
   }
 
   async add(name: string, count: number, price: number, category: string) {
-    const color = this.categories.find(cat => cat.name === category)!.color;
-    await this.purchaseService.add(name, count, price, { "name": category, "color": color.toString() });
+    const color = this.categories.find((cat) => cat.name === category)!.color;
+    await this.purchaseService.add(name, count, price, {
+      name: category,
+      color: color.toString(),
+    });
     await this.refresh();
+  }
+
+  setActiveCategory(category: Category) {
+    if (this.activeCategory.name === category.name) {
+      this.activeCategory = { name: '', color: '' };
+    } else {
+      this.activeCategory = category;
+    }
+  }
+
+  isActiveCategory(category: Category) {
+    return category.name === this.activeCategory.name;
   }
 
   async sync() {
@@ -66,30 +101,41 @@ export class PurchasesComponent {
     await this.refresh();
   }
 
-
-  openDialog(id: string, name: string, count: number, price: number, category: Category) {
+  openDialog(
+    id: string,
+    name: string,
+    count: number,
+    price: number,
+    category: Category
+  ) {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         id: id,
         name: name,
         count: count,
         price: price,
-        category: category
+        category: category,
       },
     });
 
-
     dialogRef.afterClosed().subscribe((result) => {
       if (!result.id) return;
-      result.category = {name: result.categoryName, color: this.categories.find(cat => cat.name === result.categoryName)!.color};
+      result.category = {
+        name: result.categoryName,
+        color: this.categories.find((cat) => cat.name === result.categoryName)!
+          .color,
+      };
       this.purchaseService.editEntry(result);
       this.refresh();
     });
   }
 
-  formatDate(date : Date) {
-    const dateArray : string[] = [date.toLocaleDateString("en-UK", { weekday: 'short' }), date.toLocaleDateString("en-UK", { month: '2-digit', day: 'numeric' })];
-    return dateArray
+  formatDate(date: Date) {
+    const dateArray: string[] = [
+      date.toLocaleDateString('en-UK', { weekday: 'short' }),
+      date.toLocaleDateString('en-UK', { month: '2-digit', day: 'numeric' }),
+    ];
+    return dateArray;
   }
 
   //Styling methods
@@ -97,4 +143,3 @@ export class PurchasesComponent {
     moveItemInArray(this.purchases, event.previousIndex, event.currentIndex);
   }
 }
-
