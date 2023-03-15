@@ -41,7 +41,8 @@ export class PurchasesService extends Dexie{
     await this.purchases.update(purchase.id, {
       count: purchase.count,
       name: purchase.name,
-      price: purchase.price
+      price: purchase.price,
+      category: purchase.category
     });
   }
 

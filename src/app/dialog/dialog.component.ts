@@ -37,7 +37,7 @@ export class DialogComponent {
       count: this.count,
       name: this.name,
       price: this.price,
-      category: this.category
+      categoryName: this.category
     })
   }
 
