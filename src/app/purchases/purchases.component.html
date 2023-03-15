@@ -1,140 +1,22 @@
 <mat-toolbar class="mb-2 justify-center" color="primary">
   <span>Total Expenses: {{ totalExpenses.toFixed(2) }} €</span>
 </mat-toolbar>
-<div id="NewEntry" class="w-10/12 mx-auto">
-  <span class="text-lg ">New Entry</span>
-</div>
-<div id="EntryInputs" class="flex flex-col justify-around md:w-10/12 md:mx-auto md:flex-row md:gap-3 md:justify-start">
-  <mat-form-field class="w-10/12 mx-auto">
-    <mat-label>Name</mat-label>
-    <input matInput type="text" #name [formControl]="requiredFormControl" />
-    <mat-icon matSuffix>text_format</mat-icon>
-    <mat-error *ngIf="requiredFormControl.invalid"
-      >Please enter a valid name.</mat-error
-    >
-  </mat-form-field>
-  <mat-form-field class="w-10/12 mx-auto">
-    <mat-label>Price</mat-label>
-    <input matInput type="text" #price [formControl]="priceFormControl" />
-    <mat-icon matSuffix>attach_money</mat-icon>
-    <mat-error *ngIf="priceFormControl.invalid"
-      >Please enter a valid price.</mat-error
-    >
-  </mat-form-field>
-  <mat-form-field class="w-10/12 mx-auto">
-    <mat-label>Amount</mat-label>
-    <input type="text" matInput #count [formControl]="numberFormControl" />
-    <mat-icon matSuffix>shopping_cart</mat-icon>
-    <mat-error *ngIf="numberFormControl.invalid">Please enter a valid number.</mat-error>
-  </mat-form-field>
-  <mat-form-field class="w-10/12 mx-auto">
-    <mat-label>Category</mat-label>
-    <mat-select matInput #category [formControl]="requiredFormControl">
-      <mat-option *ngFor="let category of categories" [value]="category.name">
-        {{ category.name }}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="requiredFormControl.invalid">Please enter a category.</mat-error>
-  </mat-form-field>
-  <div class="w-12/12 flex mb-5 justify-center">
-    <button
-      color="primary"
-      mat-fab
-      (click)="
-        numberFormControl.valid && requiredFormControl.valid && priceFormControl.valid && requiredFormControl.valid
-          ? add(name.value, +count.value, +price.value, category.value)
-          : ''
-      "
-      type="submit"
-    >
-      <mat-icon
-        aria-hidden="false"
-        aria-label="Add Purchase"
-      >add_shopping_cart</mat-icon>
-    </button>
-  </div>
-</div>
+
+<app-add-entry (refresh)="refresh()"></app-add-entry>
 <div id="YourEntries" class="w-10/12 md:w-6/12 mx-auto">
   <span class="text-lg text-center">Your Entries</span>
 </div>
-<div id="Search" class="flex justify-center w-10/12 md:w-6/12 mx-auto">
-  <mat-form-field class="w-full">
-    <mat-label>Search</mat-label>
-    <input matInput type="text" [(ngModel)]="searchText" />
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</div>
-<div id="Filter" class="w-10/12 md:w-6/12 mx-auto">
-  <mat-chip-listbox aria-label="Filter by Categories" [(ngModel)]="filteredCategoryName">
-    <div *ngFor="let category of categories">
-      <mat-chip-option [ngStyle]="{'background-color' : isActiveCategory(category) ? category.color : ''}" (click)="setActiveCategory(category)">{{ category.name }}</mat-chip-option>
-    </div>
-  </mat-chip-listbox>
-</div>
-<div id="PurchasesList" class="example-list flex flex-col items-center w-10/12 mx-auto md:w-6/12" cdkDropList (cdkDropListDropped)="drop($event)">
-  <mat-card
-    class="w-full example-box"
-    cdkDrag
-    *ngFor="let purchase of purchases | filter : searchText | filter : filteredCategoryName"
-    >
-    <div id="Purchase" class="flex justify-between items-center">
-      <div id="Date" class="flex flex-col justify-start items-center w-1/12">
-        <span class="text-left text-xs">{{ formatDate(purchase.createdAt!)[0] }}</span>
-        <span class="text-left text-xs">{{ formatDate(purchase.createdAt!)[1] }}</span>
-      </div>
-      <div id="Infos" class="pl-5 flex flex-col w-4/12 overflow-x-hidden">
-        
-        <span
-        class="font-bold lg:text-base text-xs"
-        [style.color]="purchase.category.color"
-        >{{ purchase.category ? purchase.category.name : "" }}</span
-        >
-        
-        <div>
-          <span class="lg:text-xl text-lg text-gray-700">{{ purchase.count }}x </span>
-          <span class="lg:text-2xl text-xl font-bold uppercase">{{ purchase.name }}</span>
-        </div>
-        
-      </div>
-
-      
-      <div id="Price" class="flex flex-col items-end w-3/12 overflow-x-hidden">
-        <span class="text-sm lg:text-xl">{{
-          purchase.price.toFixed(2) + "€"
-        }}</span>
-        <span class="text-xl lg:text-2xl font-bold">{{
-          (purchase.price * purchase.count).toFixed(2) + "€"
-        }}</span>
-      </div>
-      
-      <div id="ActionButtons" class="flex justify-end gap-2 w-5/12 pr-4" >
-        <button
-          mat-mini-fab
-          color="primary"
-          (click)="
-            openDialog(
-              purchase.id,
-              purchase.name,
-              purchase.count,
-              purchase.price,
-              purchase.category
-            )
-          "
-        >
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Edit"
-            fontIcon="edit"
-          ></mat-icon>
-        </button>
-        <button mat-mini-fab color="warn" (click)="delete(purchase.id)">
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Delete"
-            fontIcon="delete"
-          ></mat-icon>
-        </button>
-      </div>
-    </div>
-  </mat-card>
-</div>
+<app-purchase-search
+  (searchTextChanged)="searchText = $event"
+></app-purchase-search>
+<app-filter-chips
+  [categories]="this.categories"
+  (filteredCategoryChanged)="filteredCategoryName = $event"
+></app-filter-chips>
+<app-purchases-list
+  [searchText]="searchText"
+  [filteredCategoryName]="filteredCategoryName"
+  [purchases]="purchases"
+  [categories]="this.categories"
+  (refresh)="this.refresh()"
+></app-purchases-list>
