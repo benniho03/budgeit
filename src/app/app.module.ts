@@ -21,12 +21,18 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
+import { PurchaseCardComponent } from './purchase-card/purchase-card.component';
+import { AddEntryComponent } from './add-entry/add-entry.component';
+import { PurchasesListComponent } from './purchases-list/purchases-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PurchasesComponent,
     DialogComponent,
+    PurchaseCardComponent,
+    AddEntryComponent,
+    PurchasesListComponent,
   ],
   imports: [
     FormsModule,
